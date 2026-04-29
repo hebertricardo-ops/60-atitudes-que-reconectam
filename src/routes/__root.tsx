@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { ProgressProvider } from "@/hooks/useProgress";
 import { TopBar } from "@/components/app/TopBar";
+import { AuthGate } from "@/components/app/AuthGate";
 
 function NotFoundComponent() {
   return (
@@ -70,16 +71,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <ProgressProvider>
-      <div className="min-h-screen flex flex-col">
-        <TopBar />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <footer className="py-10 text-center text-xs uppercase tracking-[0.22em] text-muted-foreground/70 px-px pl-[20px] pr-[20px]">
-          feito com cuidado · 60 Atitudes Simples Que Reconectam um Casal em 30 Minutos
-        </footer>
-      </div>
-    </ProgressProvider>
+    <AuthGate>
+      <ProgressProvider>
+        <div className="min-h-screen flex flex-col">
+          <TopBar />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <footer className="py-10 text-center text-xs uppercase tracking-[0.22em] text-muted-foreground/70 px-px pl-[20px] pr-[20px]">
+            feito com cuidado · 60 Atitudes Simples Que Reconectam um Casal em 30 Minutos
+          </footer>
+        </div>
+      </ProgressProvider>
+    </AuthGate>
   );
 }
