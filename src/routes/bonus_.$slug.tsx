@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { bonuses, type Bonus, type BonusFeature } from "@/data/bonuses";
 import { ArrowLeft, Check, Copy, Gift, Sparkles, X } from "lucide-react";
 import { useState } from "react";
+import { BonusGate } from "@/components/app/BonusGate";
 
 export const Route = createFileRoute("/bonus_/$slug")({
   loader: ({ params }) => {
@@ -34,6 +35,7 @@ function BonusDetail() {
   const bonus = Route.useLoaderData() as Bonus;
 
   return (
+    <BonusGate>
     <div className="mx-auto max-w-2xl px-5 pt-6 pb-16">
       <Link
         to="/bonus"
@@ -85,6 +87,7 @@ function BonusDetail() {
         </a>
       </div>
     </div>
+    </BonusGate>
   );
 }
 

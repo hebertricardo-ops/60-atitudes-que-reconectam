@@ -1,0 +1,2 @@
+[functions.webhook-hotmart-refund]
+verify_jwt = false

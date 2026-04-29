@@ -5,28 +5,24 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-interface HotmartPayload {
+interface HotmartRefundPayload {
   event: string
   data: {
     buyer: {
       email: string
-      name?: string
-      phone?: string
-      phone_local_code?: string
-      phone_number?: string
-      checkout_phone_code?: string
-      checkout_phone?: string
     }
     purchase: {
       status: string
     }
-    subscription?: {
-      plan?: {
-        name?: string
-      }
-    }
   }
 }
+
+const EVENTOS_REEMBOLSO = [
+  'PURCHASE_REFUNDED',
+  'PURCHASE_CHARGEBACK',
+  'PURCHASE_CANCELED',
+  'PURCHASE_EXPIRED',
+]
 
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
@@ -44,15 +40,14 @@ Deno.serve(async (req: Request) => {
     return json({ error: 'Não autorizado' }, 401)
   }
 
-  let body: HotmartPayload
+  let body: HotmartRefundPayload
   try {
     body = await req.json()
   } catch {
     return json({ error: 'Payload inválido' }, 400)
   }
 
-  const EVENTOS_APROVADOS = ['PURCHASE_APPROVED', 'PURCHASE_COMPLETE']
-  if (!EVENTOS_APROVADOS.includes(body.event)) {
+  if (!EVENTOS_REEMBOLSO.includes(body.event)) {
     return json({ ok: true, message: 'Evento ignorado' })
   }
 
@@ -61,41 +56,19 @@ Deno.serve(async (req: Request) => {
     return json({ error: 'E-mail não encontrado no payload' }, 400)
   }
 
-  const buyer = body.data.buyer
-  const phone =
-    buyer.phone ??
-    (buyer.phone_local_code && buyer.phone_number
-      ? `+${buyer.phone_local_code}${buyer.phone_number}`
-      : buyer.checkout_phone
-        ? `+${buyer.checkout_phone_code ?? ''}${buyer.checkout_phone}`
-        : '')
-
-  // Extrair nome do plano — fallback para PLANO BASICO se não vier
-  const planRaw = body.data?.subscription?.plan?.name?.toUpperCase().trim() ?? 'PLANO BASICO'
-  const plan = planRaw === 'PLANO COMPLETO' ? 'PLANO COMPLETO' : 'PLANO BASICO'
-
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!
   const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const { error } = await supabase.from('buyers').upsert(
-    {
-      email,
-      full_name: buyer.name ?? '',
-      phone,
-      plan,
-      updated_at: new Date().toISOString(),
-    },
-    { onConflict: 'email' },
-  )
+  const { error } = await supabase.from('buyers').delete().eq('email', email)
 
   if (error) {
-    console.error('[webhook-hotmart] Erro ao salvar comprador:', error.message)
+    console.error('[webhook-hotmart-refund] Erro ao remover comprador:', error.message)
     return json({ error: 'Erro interno' }, 500)
   }
 
-  console.log(`[webhook-hotmart] Comprador registrado: ${email} (plano: ${plan})`)
+  console.log(`[webhook-hotmart-refund] Acesso removido: ${email} (evento: ${body.event})`)
   return json({ ok: true })
 })
 

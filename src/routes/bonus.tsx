@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { bonuses } from "@/data/bonuses";
 import { Gift, Sparkles } from "lucide-react";
+import { BonusGate } from "@/components/app/BonusGate";
 
 export const Route = createFileRoute("/bonus")({
   head: () => ({
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/bonus")({
 
 function BonusIndex() {
   return (
+    <BonusGate>
     <div className="mx-auto max-w-2xl px-5 pt-10 pb-16">
       <div className="text-center mb-10">
         <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-primary/80">
@@ -81,5 +83,6 @@ function BonusIndex() {
       </div>
 
     </div>
+    </BonusGate>
   );
 }

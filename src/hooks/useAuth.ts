@@ -6,12 +6,15 @@ const SESSION_DURATION_DAYS = 30
 interface AuthState {
   verified: boolean
   email: string | null
+  plan: string | null
   expiresAt: number | null
 }
 
 interface UseAuthReturn {
   isVerified: boolean
   email: string | null
+  plan: string | null
+  hasFullAccess: boolean
   isLoading: boolean
   error: string | null
   verifyEmail: (email: string) => Promise<boolean>
@@ -20,25 +23,26 @@ interface UseAuthReturn {
 
 function loadSession(): AuthState {
   if (typeof window === 'undefined') {
-    return { verified: false, email: null, expiresAt: null }
+    return { verified: false, email: null, plan: null, expiresAt: null }
   }
   try {
     const raw = localStorage.getItem(AUTH_KEY)
-    if (!raw) return { verified: false, email: null, expiresAt: null }
+    if (!raw) return { verified: false, email: null, plan: null, expiresAt: null }
     const parsed: AuthState = JSON.parse(raw)
     if (parsed.expiresAt && Date.now() > parsed.expiresAt) {
       localStorage.removeItem(AUTH_KEY)
-      return { verified: false, email: null, expiresAt: null }
+      return { verified: false, email: null, plan: null, expiresAt: null }
     }
     return parsed
   } catch {
-    return { verified: false, email: null, expiresAt: null }
+    return { verified: false, email: null, plan: null, expiresAt: null }
   }
 }
 
-function saveSession(email: string) {
+function saveSession(email: string, plan: string) {
   const expiresAt = Date.now() + SESSION_DURATION_DAYS * 24 * 60 * 60 * 1000
-  localStorage.setItem(AUTH_KEY, JSON.stringify({ verified: true, email, expiresAt }))
+  const state: AuthState = { verified: true, email, plan, expiresAt }
+  localStorage.setItem(AUTH_KEY, JSON.stringify(state))
 }
 
 export function useAuth(): UseAuthReturn {
@@ -70,10 +74,11 @@ export function useAuth(): UseAuthReturn {
         body: JSON.stringify({ email: normalizedEmail }),
       })
       if (!res.ok) throw new Error('Erro ao verificar e-mail. Tente novamente.')
-      const data: { valid: boolean } = await res.json()
+      const data: { valid: boolean; plan: string | null } = await res.json()
       if (data.valid) {
-        saveSession(normalizedEmail)
-        setState({ verified: true, email: normalizedEmail, expiresAt: null })
+        const plan = data.plan ?? 'PLANO BASICO'
+        saveSession(normalizedEmail, plan)
+        setState({ verified: true, email: normalizedEmail, plan, expiresAt: null })
         return true
       } else {
         setError('E-mail não encontrado. Verifique se é o mesmo e-mail utilizado na compra.')
@@ -89,8 +94,17 @@ export function useAuth(): UseAuthReturn {
 
   const logout = useCallback(() => {
     localStorage.removeItem(AUTH_KEY)
-    setState({ verified: false, email: null, expiresAt: null })
+    setState({ verified: false, email: null, plan: null, expiresAt: null })
   }, [])
 
-  return { isVerified: state.verified, email: state.email, isLoading, error, verifyEmail, logout }
+  return {
+    isVerified: state.verified,
+    email: state.email,
+    plan: state.plan,
+    hasFullAccess: state.plan === 'PLANO COMPLETO',
+    isLoading,
+    error,
+    verifyEmail,
+    logout,
+  }
 }

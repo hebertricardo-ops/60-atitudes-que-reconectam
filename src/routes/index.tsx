@@ -5,7 +5,8 @@ import { ProgressRing } from "@/components/app/ProgressRing";
 import { useProgress, totals } from "@/hooks/useProgress";
 import heroImg from "@/assets/hero.jpg";
 import { bonuses } from "@/data/bonuses";
-import { Gift, Sparkles } from "lucide-react";
+import { Gift, Lock, Sparkles } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,6 +21,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { progress, readCount, habitsDone, state } = useProgress();
   const nextSlug = modules.find((m) => !state.read[m.slug])?.slug ?? "introducao";
+  const { hasFullAccess } = useAuth();
 
   return (
     <div>
@@ -96,8 +98,9 @@ function Index() {
           </div>
           <Link
             to="/bonus"
-            className="text-xs uppercase tracking-[0.18em] text-primary hover:underline"
+            className="text-xs uppercase tracking-[0.18em] text-primary hover:underline inline-flex items-center gap-1"
           >
+            {!hasFullAccess && <Lock className="h-3 w-3" />}
             ver todos →
           </Link>
         </div>
@@ -111,7 +114,10 @@ function Index() {
               className="group rounded-3xl border border-border/70 bg-card hover:border-primary/40 hover:shadow-[0_20px_60px_-30px_oklch(0.62_0.10_35/0.45)] transition-all duration-500 p-5 flex flex-col gap-3"
             >
               <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[var(--blush)] to-[var(--sand)] flex items-center justify-center">
-                <Gift className="h-5 w-5 text-primary" />
+                {hasFullAccess
+                  ? <Gift className="h-5 w-5 text-primary" />
+                  : <Lock className="h-5 w-5 text-primary/60" />
+                }
               </div>
               <div>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-primary/80">
@@ -124,9 +130,15 @@ function Index() {
                   {b.subtitle}
                 </p>
               </div>
-              <span className="mt-auto inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-primary group-hover:translate-x-1 transition-transform">
-                <Sparkles className="h-3 w-3" /> abrir
-              </span>
+              {hasFullAccess ? (
+                <span className="mt-auto inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-primary group-hover:translate-x-1 transition-transform">
+                  <Sparkles className="h-3 w-3" /> abrir
+                </span>
+              ) : (
+                <span className="mt-auto inline-flex items-center gap-1 text-xs text-muted-foreground">
+                  <Lock className="h-3 w-3" /> Plano Completo
+                </span>
+              )}
             </Link>
           ))}
         </div>

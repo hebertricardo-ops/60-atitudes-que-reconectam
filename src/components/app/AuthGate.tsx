@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { useAuth } from '@/hooks/useAuth'
+import capa from '@/assets/capa-login.jpg'
 
 interface AuthGateProps {
   children: ReactNode
@@ -30,32 +31,17 @@ export function AuthGate({ children }: AuthGateProps) {
         padding: '2rem 1.25rem',
       }}
     >
-      <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-        <p
+      <div style={{ width: '100%', maxWidth: '380px', marginBottom: '2rem' }}>
+        <img
+          src={capa}
+          alt="60 Atitudes Simples: Reconecte seu Casamento com 30 Minutos por Dia"
           style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: '13px',
-            letterSpacing: '0.12em',
-            color: '#9A8880',
-            textTransform: 'uppercase',
-            marginBottom: '0.75rem',
+            width: '100%',
+            height: 'auto',
+            borderRadius: '16px',
+            display: 'block',
           }}
-        >
-          Reconectar
-        </p>
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(1.4rem, 5vw, 1.9rem)',
-            fontWeight: 400,
-            color: '#4A4A4A',
-            lineHeight: 1.3,
-            maxWidth: '320px',
-            margin: '0 auto',
-          }}
-        >
-          60 Atitudes Simples Que Reconectam um Casal em 30 Minutos
-        </h1>
+        />
       </div>
 
       <div

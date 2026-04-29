@@ -33,7 +33,7 @@ Deno.serve(async (req: Request) => {
 
   const { data, error } = await supabase
     .from('buyers')
-    .select('email')
+    .select('email, plan')
     .eq('email', email)
     .maybeSingle()
 
@@ -42,7 +42,10 @@ Deno.serve(async (req: Request) => {
     return json({ error: 'Erro interno' }, 500)
   }
 
-  return json({ valid: data !== null })
+  return json({
+    valid: data !== null,
+    plan: data?.plan ?? null,
+  })
 })
 
 function json(data: object, status = 200) {
