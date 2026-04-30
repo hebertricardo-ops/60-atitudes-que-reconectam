@@ -96,11 +96,14 @@ function BumpSection({ section }: { section: OrderBumpSection }) {
             fontSize: '1.25rem',
             fontWeight: 400,
             color: '#4A4A4A',
-            marginBottom: '1.5rem',
+            marginBottom: '1rem',
           }}>
             {section.title}
           </h2>
         )}
+        {section.paragraphs?.map((p, i) => (
+          <p key={i} style={{ fontSize: '14px', color: '#6B5F5A', lineHeight: 1.7, marginBottom: '1.25rem' }}>{p}</p>
+        ))}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {section.steps?.map((step) => (
             <BumpStep key={step.number} step={step} />
@@ -176,9 +179,11 @@ function BumpStep({ step }: { step: OrderBumpStep }) {
       }}>
         {step.title}
       </h3>
-      <p style={{ fontSize: '13px', color: '#9A7060', marginBottom: '0.75rem', fontStyle: 'italic' }}>
-        {step.subtitle}
-      </p>
+      {step.subtitle && (
+        <p style={{ fontSize: '13px', color: '#9A7060', marginBottom: '0.75rem', fontStyle: 'italic' }}>
+          {step.subtitle}
+        </p>
+      )}
       <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         {step.bullets.map((b, i) => (
           <li key={i} style={{ fontSize: '14px', color: '#4A4A4A', lineHeight: 1.7 }}>{b}</li>

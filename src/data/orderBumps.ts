@@ -1,7 +1,7 @@
 export interface OrderBumpStep {
   number: number
   title: string
-  subtitle: string
+  subtitle?: string
   bullets: string[]
   script?: string
   scriptNote?: string
@@ -191,15 +191,171 @@ export const orderBumps: OrderBump[] = [
       },
     ],
   },
-  // Order Bump 3 — conteúdo a ser inserido em prompt futuro
   {
     slug: 'kit-mensagens',
     title: 'O Poder do Toque Invisível: 15 Gestos que Acendem o Desejo sem Dizer uma Palavra',
     subtitle: 'Gestos silenciosos que criam proximidade e reacendem o desejo no dia a dia',
-    badge: 'Kit Prático',
+    badge: 'Guia de Gestos',
     readTime: '8 min',
-    coverEmoji: '💬',
-    sections: [],
+    coverEmoji: '💫',
+    sections: [
+      {
+        type: 'intro',
+        paragraphs: [
+          'Você não precisa de lingeries caras ou de conversas constrangedoras para reacender a química. O corpo masculino responde quase instantaneamente a estímulos físicos e visuais. O segredo é quebrar a "barreira do toque" que a rotina criou, de forma tão natural que ele nem perceberá que é uma técnica.',
+          'Dividimos esses 15 gestos em 3 níveis de intensidade. Escolha um por dia e apenas observe a reação dele.',
+        ],
+      },
+      {
+        type: 'steps',
+        title: '🟢 Nível 1: Quebrando a Barreira do Toque (Seguro e Casual)',
+        paragraphs: [
+          'O objetivo aqui não é o sexo imediato, mas fazer o corpo dele se reacostumar com o seu toque.',
+        ],
+        steps: [
+          {
+            number: 1,
+            title: 'O Toque de Passagem',
+            bullets: [
+              'Quando ele estiver em pé (na cozinha ou no corredor) e você precisar passar, não peça licença se encolhendo.',
+              'Passe rente a ele e deslize a sua mão levemente pelas costas ou cintura dele.',
+            ],
+          },
+          {
+            number: 2,
+            title: 'O Ajuste de Cuidado',
+            bullets: [
+              'Antes dele sair para o trabalho, aproxime-se de frente, olhe nos olhos dele e arrume a gola da camisa ou limpe um "fiozinho invisível" no ombro dele.',
+              'É um gesto de posse e cuidado.',
+            ],
+          },
+          {
+            number: 3,
+            title: 'A Mão no Joelho',
+            bullets: [
+              'Quando estiverem assistindo TV ou no carro, simplesmente descanse a sua mão na coxa ou joelho dele.',
+              'Não faça carinho, apenas deixe a mão lá, transmitindo segurança e presença.',
+            ],
+          },
+          {
+            number: 4,
+            title: 'O Esbarrão Intencional',
+            bullets: [
+              'Se ele estiver cozinhando ou lavando a louça, entre no espaço dele.',
+              'Esbarre o seu quadril no dele levemente para pegar algo no armário.',
+              'Quebre a distância de segurança.',
+            ],
+          },
+          {
+            number: 5,
+            title: 'O Beijo de 3 Segundos',
+            bullets: [
+              'Troque o "selinho" automático de chegada por um beijo onde seus lábios ficam encostados por exatos 3 segundos antes de você se afastar.',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'steps',
+        title: '🟡 Nível 2: Construindo a Tensão (O Frio na Barriga)',
+        paragraphs: [
+          'Aqui, você começa a enviar sinais silenciosos de que o enxerga como homem, não apenas como um colega de quarto.',
+        ],
+        steps: [
+          {
+            number: 6,
+            title: 'O Olhar e o Sorriso Lento',
+            bullets: [
+              'Quando ele estiver falando sobre algo banal, sustente o olhar na boca e depois nos olhos dele por 3 segundos.',
+              'Dê um sorriso leve, morda o lábio inferior discretamente e desvie o olhar.',
+            ],
+          },
+          {
+            number: 7,
+            title: 'A Mão no Peito',
+            bullets: [
+              'Quando você for falar algo perto dele, espalhe a palma da sua mão aberta diretamente no peito dele.',
+              'Esse é um gesto ancestral que transmite domínio e vulnerabilidade ao mesmo tempo.',
+            ],
+          },
+          {
+            number: 8,
+            title: 'O Abraço de Retaguarda',
+            bullets: [
+              'Enquanto ele estiver de costas (no computador ou na pia), abrace-o por trás, encostando o seu corpo completamente no dele.',
+              'Descanse o rosto nas costas dele por alguns segundos.',
+            ],
+          },
+          {
+            number: 9,
+            title: 'O Sussurro Direcionado',
+            bullets: [
+              'Em vez de falar de longe, chegue muito perto e encoste os lábios quase na orelha dele.',
+              'Fale algo trivial (ex: "o jantar está quase pronto") usando um tom de voz um pouco mais baixo.',
+            ],
+          },
+          {
+            number: 10,
+            title: 'O Carinho na Nuca',
+            bullets: [
+              'A nuca é uma área altamente sensível.',
+              'Quando passar por ele sentado, passe os dedos levemente pelos cabelos da nuca dele e continue andando, sem parar para conversar.',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'steps',
+        title: '🔴 Nível 3: O Desejo Despertado (Ação Direta Invisível)',
+        paragraphs: [
+          'Estes gestos comunicam atração direta e prometem o retorno da intimidade do início da relação.',
+        ],
+        steps: [
+          {
+            number: 11,
+            title: 'A Troca de Roupa Distraída',
+            bullets: [
+              'Os homens são extremamente visuais.',
+              'Em vez de se trocar no banheiro de portas trancadas, troque de blusa ou coloque a roupa de dormir no mesmo ambiente que ele, de forma natural, fingindo não notar que ele pode olhar.',
+            ],
+          },
+          {
+            number: 12,
+            title: 'Pernas Entrelaçadas (Por Baixo da Mesa)',
+            bullets: [
+              'Durante uma refeição (em casa ou restaurante), tire o sapato discretamente e encoste o seu pé ou a sua perna na dele.',
+              'Mantenha o contato físico por baixo da mesa como se fosse um segredo.',
+            ],
+          },
+          {
+            number: 13,
+            title: 'O Puxão Pela Camisa',
+            bullets: [
+              'Se ele for te dar um beijo ou um abraço rápido, segure-o pelo tecido da camisa (na altura do peito) e puxe-o levemente de volta para você.',
+              'É um sinal físico claro de "eu quero mais".',
+            ],
+          },
+          {
+            number: 14,
+            title: 'O Beijo no Pescoço Surpresa',
+            bullets: [
+              'Quebre o protocolo.',
+              'Em vez do beijo na boca, aborde-o e dê um beijo demorado e quente na lateral do pescoço.',
+              'O elemento surpresa dispara a adrenalina dele.',
+            ],
+          },
+          {
+            number: 15,
+            title: 'O Toque com Elogio Visual',
+            bullets: [
+              'Encoste a mão no braço ou no peito dele e faça um elogio físico direto.',
+              '"Sempre esqueço como seus braços ficam bonitos nessa camiseta."',
+              'O toque valida o elogio e acende o ego masculino.',
+            ],
+          },
+        ],
+      },
+    ],
   },
 ]
 
