@@ -3,6 +3,16 @@ import { modules, type HabitBlock, type Module } from "@/data/modules";
 import { useProgress } from "@/hooks/useProgress";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 
+function parseNote(note: string) {
+  const [taticaRaw = "", rest = ""] = note.split(" Como fazer hoje: ");
+  const [howTo = "", script = ""] = rest.split(" O Script: ");
+  return {
+    tactic: taticaRaw.replace("A Tática: ", "").trim(),
+    howTo: howTo.trim(),
+    script: script.trim(),
+  };
+}
+
 type LoaderData = { mod: Module; block: HabitBlock; index: number };
 
 export const Route = createFileRoute("/modulo_/$slug/bloco/$blockId")({
@@ -99,11 +109,37 @@ function BlockPage() {
                     >
                       {h.title}
                     </span>
-                    {h.note && (
-                      <span className="mt-1.5 block text-[14px] leading-relaxed text-muted-foreground">
-                        {h.note}
-                      </span>
-                    )}
+                    {h.note && (() => {
+                      const { tactic, howTo, script } = parseNote(h.note!);
+                      return (
+                        <div className="mt-3 flex flex-col gap-2.5 text-[13px] leading-relaxed">
+                          {tactic && (
+                            <div>
+                              <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/70">
+                                A Tática
+                              </span>
+                              <span className="text-muted-foreground">{tactic}</span>
+                            </div>
+                          )}
+                          {howTo && (
+                            <div>
+                              <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/70">
+                                Como Fazer Hoje
+                              </span>
+                              <span className="text-muted-foreground">{howTo}</span>
+                            </div>
+                          )}
+                          {script && (
+                            <div className="border-l-2 border-primary/30 pl-3">
+                              <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/70">
+                                O Script
+                              </span>
+                              <span className="italic text-foreground/75">{script}</span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
                   </span>
                 </button>
               </li>
