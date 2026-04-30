@@ -11,37 +11,42 @@ export function TopBar() {
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60">
-      <div className="mx-auto max-w-2xl px-5 py-3 flex items-center gap-3">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="font-display tracking-tight text-foreground/90 group-hover:text-primary transition-colors text-lg">
-            60 Atitudes Simples: Reconecte seu Casamento com 30 Minutos por Dia
-          </span>
-        </Link>
-        <div className="flex-1" />
-        <Link
-          to="/bonus"
-          className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition"
-          activeProps={{ className: "text-xs uppercase tracking-[0.18em] text-primary" }}
-        >
-          bônus
-        </Link>
-        {!isHome && (
+      <div className="mx-auto max-w-2xl px-5">
+        {/* Linha 1 — navegação */}
+        <div className="flex items-center justify-end gap-3 pt-2 pb-1 pr-6">
           <Link
-            to="/"
+            to="/bonus"
             className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition"
+            activeProps={{ className: "text-xs uppercase tracking-[0.18em] text-primary" }}
           >
-            módulos
+            bônus
           </Link>
-        )}
-        {isVerified && (
-          <button
-            onClick={() => { logout(); window.location.replace("/"); }}
-            className="text-muted-foreground hover:text-destructive transition"
-            title="Sair"
-          >
-            <LogOut size={16} />
-          </button>
-        )}
+          {!isHome && (
+            <Link
+              to="/"
+              className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition"
+            >
+              módulos
+            </Link>
+          )}
+          {isVerified && (
+            <button
+              onClick={() => { logout(); window.location.replace("/"); }}
+              className="text-muted-foreground hover:text-destructive transition"
+              title="Sair"
+            >
+              <LogOut size={16} />
+            </button>
+          )}
+        </div>
+        {/* Linha 2 — nome do produto */}
+        <div className="pb-2">
+          <Link to="/" className="group">
+            <span className="font-display tracking-tight text-foreground/90 group-hover:text-primary transition-colors text-lg leading-tight">
+              60 Atitudes Simples: Reconecte seu<br />Casamento com 30 Minutos por Dia
+            </span>
+          </Link>
+        </div>
       </div>
       <div className="h-[3px] w-full bg-muted/60">
         <div
