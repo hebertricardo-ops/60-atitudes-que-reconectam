@@ -98,15 +98,98 @@ export const orderBumps: OrderBump[] = [
       },
     ],
   },
-  // Order Bump 2 — conteúdo a ser inserido em prompt futuro
   {
     slug: 'plano-7-dias',
     title: 'Detox de Insegurança: 5 Minutos Diários para Voltar a se Sentir Desejável',
     subtitle: 'Reconecte com sua autoconfiança e presença em poucos minutos por dia',
-    badge: 'Plano Guiado',
-    readTime: '10 min',
-    coverEmoji: '📅',
-    sections: [],
+    badge: 'Desafio de 7 Dias',
+    readTime: '7 min',
+    coverEmoji: '✨',
+    sections: [
+      {
+        type: 'intro',
+        title: 'A Preparação (Leitura de 1 Minuto)',
+        paragraphs: [
+          'O resgate começa por você.',
+          'Você não pode salvar o seu casamento se, toda vez que se olha no espelho, a sua voz interior for cruel. O distanciamento do seu parceiro não define o seu valor. Antes de reconectar-se com ele, você precisa reconectar-se com a mulher incrível que ficou escondida debaixo da rotina, da maternidade e das contas a pagar.',
+          'Este não é um guia de beleza. É um desafio mental de 7 dias. Você precisará de apenas 5 minutos diários para blindar a sua mente contra a comparação e voltar a caminhar pela sua casa com a postura de uma mulher confiante, segura e irresistível.',
+        ],
+      },
+      {
+        type: 'steps',
+        title: 'O Desafio de 7 Dias (O Passo a Passo)',
+        steps: [
+          {
+            number: 1,
+            title: 'O Jejum de Comparações',
+            subtitle: 'Dia 1',
+            bullets: [
+              'Nas próximas 24 horas, você está proibida de olhar os Stories ou o Feed de casais "perfeitos" ou influenciadoras no Instagram.',
+              'A vida real acontece fora da tela.',
+              'Use os 5 minutos que gastaria rolando o feed para ouvir uma música que você amava antes de casar.',
+            ],
+          },
+          {
+            number: 2,
+            title: 'O Espelho sem Julgamentos',
+            subtitle: 'Dia 2',
+            bullets: [
+              'Ao sair do banho, olhe-se no espelho.',
+              'A sua mente vai automaticamente apontar os defeitos (estrias, celulite, barriga). Interrompa esse pensamento.',
+              'Encontre uma única coisa que você gosta no seu corpo hoje — o cabelo, o sorriso, os ombros — e elogie essa parte em voz alta.',
+            ],
+          },
+          {
+            number: 3,
+            title: 'A Lista das Vitórias Silenciosas',
+            subtitle: 'Dia 3',
+            bullets: [
+              'Pegue um papel e anote 3 coisas difíceis que você superou na sua vida e que ninguém te deu os parabéns.',
+              'Você é forte. Reconheça o seu próprio esforço antes de esperar o reconhecimento dele.',
+            ],
+          },
+          {
+            number: 4,
+            title: 'O Resgate do "Eu" — A Roupa de Poder',
+            subtitle: 'Dia 4',
+            bullets: [
+              'Hoje, você não vai vestir aquela camiseta velha para ficar em casa.',
+              'Escolha uma roupa que te faça sentir bem e passe o seu perfume favorito.',
+              'Não faça isso para que ele note — faça isso exclusivamente porque você merece se sentir cheirosa e arrumada para si mesma.',
+            ],
+          },
+          {
+            number: 5,
+            title: 'O Filtro do Diálogo Interno',
+            subtitle: 'Dia 5',
+            bullets: [
+              'Preste atenção na forma como você fala consigo mesma quando comete um erro (como queimar a comida ou esquecer algo).',
+              'Pare de se chamar de "burra" ou "desatenta".',
+              'Trate-se com a mesma gentileza que você usaria para consolar a sua melhor amiga.',
+            ],
+          },
+          {
+            number: 6,
+            title: 'A Imposição do Limite Saudável',
+            subtitle: 'Dia 6',
+            bullets: [
+              'Diga "não" para uma pequena demanda hoje — seja dos filhos, do trabalho ou do marido — sem dar grandes explicações.',
+              'Dizer "não" para os outros é dizer "sim" para o seu tempo e para a sua saúde mental.',
+            ],
+          },
+          {
+            number: 7,
+            title: 'A Postura da Confiança',
+            subtitle: 'Dia 7',
+            bullets: [
+              'A linguagem corporal altera a química do cérebro.',
+              'Passe 5 minutos sentada ou em pé com as costas retas, ombros para trás e queixo erguido. Respire fundo.',
+              'Quando você muda a sua postura, o seu cérebro entende que você está no controle.',
+            ],
+          },
+        ],
+      },
+    ],
   },
   // Order Bump 3 — conteúdo a ser inserido em prompt futuro
   {
