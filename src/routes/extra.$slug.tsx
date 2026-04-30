@@ -3,9 +3,9 @@ import { getOrderBump, type OrderBump, type OrderBumpSection, type OrderBumpStep
 import { OrderBumpGate } from '@/components/app/OrderBumpGate'
 
 const CHECKOUT_URLS: Record<string, string> = {
-  'sos-anti-briga': 'https://pay.hotmart.com/PLACEHOLDER_OB1',
-  'plano-7-dias': 'https://pay.hotmart.com/PLACEHOLDER_OB2',
-  'kit-mensagens': 'https://pay.hotmart.com/PLACEHOLDER_OB3',
+  'sos-anti-briga': 'https://pay.hotmart.com/D105629618X?checkoutMode=10',
+  'plano-7-dias': 'https://pay.hotmart.com/V105630295A?checkoutMode=10',
+  'kit-mensagens': 'https://pay.hotmart.com/J105629927M?checkoutMode=10',
 }
 
 export const Route = createFileRoute('/extra/$slug')({
