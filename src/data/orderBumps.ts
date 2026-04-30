@@ -101,8 +101,8 @@ export const orderBumps: OrderBump[] = [
   // Order Bump 2 — conteúdo a ser inserido em prompt futuro
   {
     slug: 'plano-7-dias',
-    title: 'Plano de Reconexão em 7 Dias',
-    subtitle: 'Um roteiro diário para os primeiros resultados',
+    title: 'Detox de Insegurança: 5 Minutos Diários para Voltar a se Sentir Desejável',
+    subtitle: 'Reconecte com sua autoconfiança e presença em poucos minutos por dia',
     badge: 'Plano Guiado',
     readTime: '10 min',
     coverEmoji: '📅',
@@ -111,8 +111,8 @@ export const orderBumps: OrderBump[] = [
   // Order Bump 3 — conteúdo a ser inserido em prompt futuro
   {
     slug: 'kit-mensagens',
-    title: 'Kit de Mensagens de Impacto',
-    subtitle: 'Mensagens prontas para cada momento da reconexão',
+    title: 'O Poder do Toque Invisível: 15 Gestos que Acendem o Desejo sem Dizer uma Palavra',
+    subtitle: 'Gestos silenciosos que criam proximidade e reacendem o desejo no dia a dia',
     badge: 'Kit Prático',
     readTime: '8 min',
     coverEmoji: '💬',
