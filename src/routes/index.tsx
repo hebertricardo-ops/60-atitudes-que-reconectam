@@ -5,7 +5,8 @@ import { ProgressRing } from "@/components/app/ProgressRing";
 import { useProgress, totals } from "@/hooks/useProgress";
 import heroImg from "@/assets/hero.jpg";
 import { bonuses } from "@/data/bonuses";
-import { Gift, Lock, Sparkles } from "lucide-react";
+import { orderBumps } from "@/data/orderBumps";
+import { Gift, Lock, Sparkles, ShoppingBag } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/")({
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { progress, readCount, habitsDone, state } = useProgress();
   const nextSlug = modules.find((m) => !state.read[m.slug])?.slug ?? "introducao";
-  const { hasFullAccess } = useAuth();
+  const { hasFullAccess, hasExtra } = useAuth();
 
   return (
     <div>
@@ -141,6 +142,56 @@ function Index() {
               )}
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* EXTRAS */}
+      <section className="mx-auto max-w-2xl px-5 pb-12">
+        <div className="flex items-end justify-between mb-6">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+              conteúdo adicional
+            </p>
+            <h2 className="font-display text-3xl text-foreground mt-1">Guias extras</h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {orderBumps.map((ob) => {
+            const unlocked = hasExtra(ob.slug);
+            return (
+              <Link
+                key={ob.slug}
+                to="/extra/$slug"
+                params={{ slug: ob.slug }}
+                className="group rounded-3xl border border-border/70 bg-card hover:border-primary/40 hover:shadow-[0_20px_60px_-30px_oklch(0.62_0.10_35/0.45)] transition-all duration-500 p-5 flex flex-col gap-3"
+              >
+                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[var(--blush)] to-[var(--sand)] flex items-center justify-center text-xl">
+                  {ob.coverEmoji}
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-primary/80">
+                    {ob.badge}
+                  </p>
+                  <h3 className="mt-1 font-display text-lg leading-tight text-foreground text-balance">
+                    {ob.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                    {ob.subtitle}
+                  </p>
+                </div>
+                {unlocked ? (
+                  <span className="mt-auto inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-primary group-hover:translate-x-1 transition-transform">
+                    <ShoppingBag className="h-3 w-3" /> abrir
+                  </span>
+                ) : (
+                  <span className="mt-auto inline-flex items-center gap-1 text-xs text-muted-foreground">
+                    <Lock className="h-3 w-3" /> adquira em separado
+                  </span>
+                )}
+              </Link>
+            );
+          })}
         </div>
       </section>
 

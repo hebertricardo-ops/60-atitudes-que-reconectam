@@ -33,7 +33,7 @@ Deno.serve(async (req: Request) => {
 
   const { data, error } = await supabase
     .from('buyers')
-    .select('email, plan')
+    .select('email, plan, purchased_extras')
     .eq('email', email)
     .maybeSingle()
 
@@ -45,6 +45,7 @@ Deno.serve(async (req: Request) => {
   return json({
     valid: data !== null,
     plan: data?.plan ?? null,
+    purchasedExtras: data?.purchased_extras ?? [],
   })
 })
 
